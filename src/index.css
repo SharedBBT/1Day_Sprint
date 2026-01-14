@@ -1,0 +1,19 @@
+/* src/index.css */
+
+/* 1. 确保 html 和 body 占满全屏 */
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #ffffff;
+}
+
+/* 2. 最关键的一点：解除 #root 的宽度限制 */
+#root {
+  width: 100%;
+  max-width: 100%; /* 之前这里可能限制了 1280px */
+  margin: 0;
+  padding: 0;
+  text-align: left; /* 防止默认居中 */
+}
