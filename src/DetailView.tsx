@@ -1,4 +1,5 @@
 import React from 'react';
+// 移除了 User，修复 build 报错
 import { Calendar, MapPin, ArrowLeft, CheckCircle, Lightbulb, Target, Clock, Banknote, ExternalLink } from 'lucide-react';
 import { type Course, type CourseType } from './data/data';
 
@@ -9,7 +10,7 @@ interface DetailViewProps {
 
 const getCourseColor = (type: CourseType): string => {
   switch (type) {
-    case '判断': return '#009fe8';
+    case '財務': return '#009fe8'; // 【修改点】判断 -> 財務
     case '変革': return '#00c4cc';
     case 'AI×問題解決': return '#9f7aea';
     default: return '#009fe8';
@@ -129,12 +130,12 @@ export const DetailView: React.FC<DetailViewProps> = ({ course, onBack }) => {
              <h2 style={{ fontSize: '20px', fontWeight: 'bold', marginBottom: '20px', borderLeft: `4px solid ${themeColor}`, paddingLeft: '12px', color: '#4a5568' }}>登壇講師</h2>
              <div style={{ display: 'flex', gap: '20px', alignItems: 'center', backgroundColor: '#fff', border: '1px solid #e2e8f0', padding: '20px', borderRadius: '12px' }}>
                
-               {/* 头像区域：改成图片 */}
+               {/* 头像区域 */}
                <div style={{ 
                  width: '80px', 
                  height: '80px', 
                  borderRadius: '50%', 
-                 overflow: 'hidden', // 确保图片圆形裁剪
+                 overflow: 'hidden', 
                  flexShrink: 0,
                  border: '1px solid #e2e8f0'
                }}>
@@ -144,8 +145,8 @@ export const DetailView: React.FC<DetailViewProps> = ({ course, onBack }) => {
                    style={{
                      width: '100%',
                      height: '100%',
-                     objectFit: 'cover', // 保持比例填充
-                     objectPosition: 'center top' // 稍微靠上对齐，保证人脸居中
+                     objectFit: 'cover', 
+                     objectPosition: 'center top' 
                    }} 
                  />
                </div>
@@ -223,7 +224,9 @@ export const DetailView: React.FC<DetailViewProps> = ({ course, onBack }) => {
         </div>
 
       </div>
-      
+      <div style={{ textAlign: 'center', padding: '30px', color: '#a0aec0', fontSize: '12px', borderTop: '1px solid #edf2f7', marginTop: 'auto' }}>
+           Copyright © Aoba-BBT All Rights Reserved.
+      </div>
     </div>
   );
 };

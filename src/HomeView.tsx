@@ -8,7 +8,7 @@ interface HomeViewProps {
 
 const getCourseColor = (type: CourseType): string => {
   switch (type) {
-    case '判断': return '#009fe8';
+    case '財務': return '#009fe8'; // 【修改点】判断 -> 財務
     case '変革': return '#00c4cc';
     case 'AI×問題解決': return '#9f7aea';
     default: return '#009fe8';
@@ -123,7 +123,7 @@ export const HomeView: React.FC<HomeViewProps> = ({ onSelectCourse }) => {
         {/* 4. Grid Layout - Course List */}
         <div className="course-grid" style={{ 
           display: 'grid', 
-          gridTemplateColumns: 'repeat(auto-fit, minmax(550px, 1fr))', // Default for PC
+          gridTemplateColumns: 'repeat(auto-fit, minmax(550px, 1fr))', 
           gap: '30px' 
         }}>
           {courses.map((course) => {
@@ -218,18 +218,16 @@ export const HomeView: React.FC<HomeViewProps> = ({ onSelectCourse }) => {
           color: #4a5568;
           font-weight: 500;
           margin: 0;
-          word-break: break-word; /* Prevent overflow */
+          word-break: break-word; 
         }
 
         /* --- Mobile Overrides --- */
         @media (max-width: 768px) {
           .home-content-wrapper {
-            padding: 20px 20px 0 !important; /* Reduce padding */
+            padding: 20px 20px 0 !important; 
           }
-          
-          /* Banner */
           .banner-section {
-            flex-direction: column-reverse; /* Stack logo on top if needed, or keeping it bottom but stacked */
+            flex-direction: column-reverse; 
             align-items: flex-start;
             gap: 20px;
           }
@@ -240,29 +238,22 @@ export const HomeView: React.FC<HomeViewProps> = ({ onSelectCourse }) => {
           .main-title {
             font-size: 24px;
           }
-
-          /* Positioning Box */
           .positioning-box {
             padding: 20px !important;
           }
           .positioning-grid {
-            grid-template-columns: 1fr; /* Single column */
+            grid-template-columns: 1fr; 
             gap: 20px;
           }
           .pos-text {
-            font-size: 14px; /* Smaller font */
+            font-size: 14px; 
           }
-          /* Fix for the specific overflowing text */
           .pos-text br {
-            display: none; /* Hide manual line breaks on mobile to let it flow */
+            display: none; 
           }
-
-          /* Course Grid */
           .course-grid {
-            grid-template-columns: 1fr !important; /* Single column */
+            grid-template-columns: 1fr !important; 
           }
-          
-          /* Course Card Internal */
           .course-card-content {
             flex-direction: column;
             align-items: flex-start !important;

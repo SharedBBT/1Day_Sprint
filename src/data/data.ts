@@ -1,6 +1,7 @@
 // src/data/data.ts
 
-export type CourseType = '判断' | '変革' | 'AI×問題解決';
+// 【修改点1】这里把 '判断' 改为 '財務'
+export type CourseType = '財務' | '変革' | 'AI×問題解決';
 
 export interface Course {
   id: number;
@@ -16,7 +17,7 @@ export interface Course {
     name: string;
     role: string;
     description: string;
-    image: string; // 新增：讲师头像链接
+    image: string;
   };
   benefits: string[];
   recommendedFor: string[];
@@ -28,7 +29,7 @@ export const courses: Course[] = [
     id: 1,
     date: '2/9',
     dayOfWeek: '月',
-    type: '判断',
+    type: '財務', // 【修改点2】这里改为 財務
     location: '六番町',
     mapUrl: 'https://aoba-bbt.com/aoba-bbt/#section04-02',
     price: '55,000円（税込）',
@@ -136,7 +137,7 @@ export const courses: Course[] = [
     location: '麹町ラウンジ',
     mapUrl: 'https://aoba-bbt.com/aoba-bbt/#section04-01',
     price: '55,000円（税込）',
-    title: 'AI×実務で解く力 1Day Sprint',
+    title: 'AI×事業戦略 1Day Sprint', // 【修改点3】这里改为 AI×事業戦略
     subtitle: '考えたことが、\n実行されなければ意味がない。',
     description: '考えたことが、実行されなければ意味がない。AIを使い、構想を行動計画に落とし込む1日。',
     benefits: [
