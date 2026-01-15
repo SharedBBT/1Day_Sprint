@@ -1,5 +1,5 @@
 import React from 'react';
-import { Calendar, MapPin, User, ArrowLeft, CheckCircle, Lightbulb, Target, Clock, Banknote, ExternalLink } from 'lucide-react';
+import { Calendar, MapPin, ArrowLeft, CheckCircle, Lightbulb, Target, Clock, Banknote, ExternalLink } from 'lucide-react';
 import { type Course, type CourseType } from './data/data';
 
 interface DetailViewProps {
