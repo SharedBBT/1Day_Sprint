@@ -1,6 +1,5 @@
 import React from 'react';
-import { Calendar, MapPin, User, ArrowLeft, CheckCircle, Lightbulb, Target } from 'lucide-react';
-// 引入数据类型 (不需要引入 COLORS，避免未使用的警告)
+import { Calendar, MapPin, User, ArrowLeft, CheckCircle, Lightbulb, Target, Clock, Banknote, ExternalLink } from 'lucide-react';
 import { type Course, type CourseType } from './data/data';
 
 interface DetailViewProps {
@@ -8,22 +7,16 @@ interface DetailViewProps {
   onBack: () => void;
 }
 
-// 为了防止 import 报错，我们在本地也定义一次颜色逻辑，保持和 HomeView 一致
 const getCourseColor = (type: CourseType): string => {
   switch (type) {
-    case '判断': 
-      return '#009fe8'; // 蓝色
-    case '変革': 
-      return '#00c4cc'; // 青绿色
-    case 'AI×問題解決': 
-      return '#9f7aea'; // 紫色
-    default: 
-      return '#009fe8';
+    case '判断': return '#009fe8';
+    case '変革': return '#00c4cc';
+    case 'AI×問題解決': return '#9f7aea';
+    default: return '#009fe8';
   }
 };
 
 export const DetailView: React.FC<DetailViewProps> = ({ course, onBack }) => {
-  // 获取当前课程的主题色
   const themeColor = getCourseColor(course.type);
 
   return (
@@ -33,165 +26,94 @@ export const DetailView: React.FC<DetailViewProps> = ({ course, onBack }) => {
       backgroundColor: '#ffffff', 
       minHeight: '100vh',
       display: 'flex',
-      flexDirection: 'column'
+      flexDirection: 'column',
+      position: 'relative'
     }}>
       
-      {/* 1. Navigation Bar (Sticky) */}
-      <div style={{ 
-        position: 'sticky', 
-        top: 0, 
-        backgroundColor: 'rgba(255,255,255,0.98)', 
-        borderBottom: '1px solid #e2e8f0', 
-        padding: '15px 20px',
-        zIndex: 100,
-        boxShadow: '0 2px 4px rgba(0,0,0,0.02)'
-      }}>
-        <div style={{ maxWidth: '1000px', margin: '0 auto' }}>
-         <button 
-           onClick={onBack}
-           style={{ 
-             background: 'none', 
-             border: 'none', 
-             display: 'flex', 
-             alignItems: 'center', 
-             gap: '8px', 
-             cursor: 'pointer',
-             fontSize: '15px',
-             fontWeight: 'bold',
-             color: '#666',
-             padding: '8px 0'
-           }}
-           onMouseEnter={(e) => e.currentTarget.style.color = themeColor}
-           onMouseLeave={(e) => e.currentTarget.style.color = '#666'}
-         >
-           <ArrowLeft size={18} /> プログラム一覧に戻る
-         </button>
-        </div>
-      </div>
+      {/* Navigation Button */}
+      <button 
+        onClick={onBack}
+        style={{ 
+          position: 'fixed', 
+          top: '90px',   
+          right: '40px', 
+          zIndex: 9999, 
+          backgroundColor: 'white', 
+          border: '1px solid #e2e8f0', 
+          borderRadius: '50px',
+          padding: '10px 20px',
+          display: 'flex', 
+          alignItems: 'center', 
+          gap: '8px', 
+          cursor: 'pointer',
+          fontSize: '14px',
+          fontWeight: 'bold',
+          color: '#666',
+          boxShadow: '0 4px 12px rgba(0,0,0,0.08)' 
+        }}
+        onMouseEnter={(e) => {
+          e.currentTarget.style.color = themeColor;
+          e.currentTarget.style.borderColor = themeColor;
+        }}
+        onMouseLeave={(e) => {
+          e.currentTarget.style.color = '#666';
+          e.currentTarget.style.borderColor = '#e2e8f0';
+        }}
+      >
+        <ArrowLeft size={22} /> プログラム一覧に戻る
+      </button>
 
       {/* Main Content */}
-      <div style={{ flex: 1, maxWidth: '900px', margin: '0 auto', padding: '60px 24px', width: '100%' }}>
+      <div style={{ flex: 1, maxWidth: '1200px', margin: '0 auto', padding: '80px 24px 60px', width: '100%' }}>
         
-        {/* 2. Hero / Title Section */}
+        {/* Hero / Title Section */}
         <div style={{ marginBottom: '50px', borderBottom: '1px solid #eee', paddingBottom: '30px' }}>
-          {/* Badge */}
-          <span style={{ 
-            color: themeColor, 
-            backgroundColor: 'white', 
-            border: `2px solid ${themeColor}`, 
-            padding: '6px 16px', 
-            borderRadius: '50px', 
-            fontWeight: 'bold',
-            fontSize: '14px',
-            display: 'inline-block',
-            marginBottom: '20px'
-          }}>
+          <span style={{ color: themeColor, backgroundColor: 'white', border: `2px solid ${themeColor}`, padding: '6px 16px', borderRadius: '50px', fontWeight: 'bold', fontSize: '14px', display: 'inline-block', marginBottom: '20px' }}>
             {course.type}
           </span>
-
-          {/* Title */}
-          <h1 style={{ 
-            fontSize: '40px', 
-            fontWeight: '900', 
-            margin: '0 0 20px 0', 
-            lineHeight: '1.3',
-            color: '#1a202c'
-          }}>
+          <h1 style={{ fontSize: '40px', fontWeight: '900', margin: '0 0 20px 0', lineHeight: '1.3', color: '#1a202c' }}>
             {course.title}
           </h1>
-
-          {/* Subtitle */}
-          <p style={{ 
-            fontSize: '22px', 
-            fontWeight: 'bold', 
-            lineHeight: '1.6', 
-            color: themeColor 
-          }}>
+          <p style={{ fontSize: '22px', fontWeight: 'bold', lineHeight: '1.6', color: themeColor }}>
             {course.subtitle.split('\n').map((line, i) => (
-              <React.Fragment key={i}>
-                {line}<br/>
-              </React.Fragment>
+              <React.Fragment key={i}>{line}<br/></React.Fragment>
             ))}
           </p>
         </div>
 
-        {/* 3. Description Box */}
-        <div style={{ 
-          backgroundColor: '#f8f9fa', 
-          padding: '32px', 
-          borderRadius: '12px', 
-          marginBottom: '60px',
-          fontSize: '18px',
-          lineHeight: '1.9',
-          color: '#4a5568',
-          borderLeft: `6px solid ${themeColor}`
-        }}>
+        {/* Description Box */}
+        <div style={{ backgroundColor: '#f8f9fa', padding: '32px', borderRadius: '12px', marginBottom: '60px', fontSize: '18px', lineHeight: '1.9', color: '#4a5568', borderLeft: `6px solid ${themeColor}` }}>
           {course.description}
         </div>
 
-        {/* 4. Target Audience (参照PDF布局，放在前面) */}
+        {/* Target Audience */}
         <section style={{ marginBottom: '60px' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '24px' }}>
-            <div style={{ 
-              backgroundColor: themeColor, 
-              padding: '8px', 
-              borderRadius: '50%', 
-              color: 'white' 
-            }}>
+            <div style={{ backgroundColor: themeColor, padding: '8px', borderRadius: '50%', color: 'white' }}>
               <Target size={24} />
             </div>
             <h2 style={{ fontSize: '24px', fontWeight: 'bold', margin: 0 }}>こんな人に特におすすめ</h2>
           </div>
-          
-          <div style={{ 
-            backgroundColor: `${themeColor}10`, // 10% opacity hex
-            border: `1px solid ${themeColor}30`,
-            padding: '24px', 
-            borderRadius: '12px' 
-          }}>
+          <div style={{ backgroundColor: `${themeColor}10`, border: `1px solid ${themeColor}30`, padding: '24px', borderRadius: '12px' }}>
              {course.recommendedFor.map((rec, idx) => (
-               <div key={idx} style={{ 
-                 fontSize: '18px', 
-                 fontWeight: 'bold', 
-                 color: '#2d3748',
-                 marginBottom: idx !== course.recommendedFor.length - 1 ? '15px' : '0',
-                 display: 'flex',
-                 alignItems: 'flex-start',
-                 gap: '10px'
-               }}>
-                 <span style={{ color: themeColor }}>●</span>
-                 {rec}
+               <div key={idx} style={{ fontSize: '18px', fontWeight: 'bold', color: '#2d3748', marginBottom: idx !== course.recommendedFor.length - 1 ? '15px' : '0', display: 'flex', alignItems: 'flex-start', gap: '10px' }}>
+                 <span style={{ color: themeColor }}>●</span>{rec}
                </div>
              ))}
           </div>
         </section>
 
-        {/* 5. Benefits (得られること) */}
+        {/* Benefits */}
         <section style={{ marginBottom: '60px' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '24px' }}>
-            <div style={{ 
-              backgroundColor: themeColor, 
-              padding: '8px', 
-              borderRadius: '50%', 
-              color: 'white' 
-            }}>
+            <div style={{ backgroundColor: themeColor, padding: '8px', borderRadius: '50%', color: 'white' }}>
               <Lightbulb size={24} />
             </div>
             <h2 style={{ fontSize: '24px', fontWeight: 'bold', margin: 0 }}>得られること</h2>
           </div>
-          
           <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
             {course.benefits.map((benefit, idx) => (
-              <li key={idx} style={{ 
-                display: 'flex', 
-                alignItems: 'flex-start', 
-                gap: '16px', 
-                marginBottom: '16px',
-                fontSize: '18px',
-                padding: '16px',
-                backgroundColor: 'white',
-                borderBottom: '1px solid #edf2f7'
-              }}>
+              <li key={idx} style={{ display: 'flex', alignItems: 'flex-start', gap: '16px', marginBottom: '16px', fontSize: '18px', padding: '16px', backgroundColor: 'white', borderBottom: '1px solid #edf2f7' }}>
                 <CheckCircle color={themeColor} size={24} style={{ flexShrink: 0, marginTop: '3px' }} />
                 <span style={{ lineHeight: '1.6' }}>{benefit}</span>
               </li>
@@ -199,42 +121,35 @@ export const DetailView: React.FC<DetailViewProps> = ({ course, onBack }) => {
           </ul>
         </section>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '40px', marginBottom: '60px' }}>
+        {/* Instructor & Outline - Grid */}
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))', gap: '40px', marginBottom: '60px' }}>
           
-          {/* 6. Instructor */}
+          {/* Instructor */}
           <section>
-             <h2 style={{ 
-               fontSize: '20px', 
-               fontWeight: 'bold', 
-               marginBottom: '20px', 
-               borderLeft: `4px solid ${themeColor}`, 
-               paddingLeft: '12px',
-               color: '#4a5568'
-             }}>
-               登壇講師
-             </h2>
-             <div style={{ 
-               display: 'flex', 
-               gap: '20px', 
-               alignItems: 'center', 
-               backgroundColor: '#fff', 
-               border: '1px solid #e2e8f0',
-               padding: '20px',
-               borderRadius: '12px'
-             }}>
+             <h2 style={{ fontSize: '20px', fontWeight: 'bold', marginBottom: '20px', borderLeft: `4px solid ${themeColor}`, paddingLeft: '12px', color: '#4a5568' }}>登壇講師</h2>
+             <div style={{ display: 'flex', gap: '20px', alignItems: 'center', backgroundColor: '#fff', border: '1px solid #e2e8f0', padding: '20px', borderRadius: '12px' }}>
+               
+               {/* 头像区域：改成图片 */}
                <div style={{ 
                  width: '80px', 
                  height: '80px', 
-                 backgroundColor: '#edf2f7', 
                  borderRadius: '50%', 
-                 display: 'flex', 
-                 justifyContent: 'center', 
-                 alignItems: 'center', 
-                 color: '#a0aec0',
-                 flexShrink: 0
+                 overflow: 'hidden', // 确保图片圆形裁剪
+                 flexShrink: 0,
+                 border: '1px solid #e2e8f0'
                }}>
-                 <User size={40} />
+                 <img 
+                   src={course.instructor.image} 
+                   alt={course.instructor.name}
+                   style={{
+                     width: '100%',
+                     height: '100%',
+                     objectFit: 'cover', // 保持比例填充
+                     objectPosition: 'center top' // 稍微靠上对齐，保证人脸居中
+                   }} 
+                 />
                </div>
+
                <div>
                  <h3 style={{ fontSize: '20px', fontWeight: 'bold', marginBottom: '4px' }}>{course.instructor.name}</h3>
                  <p style={{ color: themeColor, fontWeight: 'bold', fontSize: '13px', marginBottom: '6px' }}>{course.instructor.role}</p>
@@ -243,22 +158,13 @@ export const DetailView: React.FC<DetailViewProps> = ({ course, onBack }) => {
              </div>
           </section>
 
-          {/* 7. Outline (Table) */}
+          {/* Outline */}
           <section>
-             <h2 style={{ 
-               fontSize: '20px', 
-               fontWeight: 'bold', 
-               marginBottom: '20px', 
-               borderLeft: `4px solid ${themeColor}`, 
-               paddingLeft: '12px',
-               color: '#4a5568'
-             }}>
-               開催概要
-             </h2>
+             <h2 style={{ fontSize: '20px', fontWeight: 'bold', marginBottom: '20px', borderLeft: `4px solid ${themeColor}`, paddingLeft: '12px', color: '#4a5568' }}>開催概要</h2>
              <table style={{ width: '100%', borderCollapse: 'collapse' }}>
                <tbody>
                  <tr style={{ borderBottom: '1px solid #edf2f7' }}>
-                   <th style={{ textAlign: 'left', padding: '16px 8px', width: '80px', color: '#718096', fontSize: '14px' }}>
+                   <th style={{ textAlign: 'left', padding: '16px 8px', width: '100px', color: '#718096', fontSize: '14px' }}>
                      <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}><Calendar size={16} /> 日程</div>
                    </th>
                    <td style={{ padding: '16px 8px', fontWeight: 'bold', fontSize: '16px' }}>
@@ -266,17 +172,30 @@ export const DetailView: React.FC<DetailViewProps> = ({ course, onBack }) => {
                    </td>
                  </tr>
                  <tr style={{ borderBottom: '1px solid #edf2f7' }}>
-                   <th style={{ textAlign: 'left', padding: '16px 8px', width: '80px', color: '#718096', fontSize: '14px' }}>
-                     <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}><MapPin size={16} /> 会場</div>
-                   </th>
-                   <td style={{ padding: '16px 8px', fontWeight: 'bold', fontSize: '16px' }}>{course.location}</td>
-                 </tr>
-                 <tr style={{ borderBottom: '1px solid #edf2f7' }}>
-                   <th style={{ textAlign: 'left', padding: '16px 8px', width: '80px', color: '#718096', fontSize: '14px' }}>
-                     价格
+                   <th style={{ textAlign: 'left', padding: '16px 8px', width: '100px', color: '#718096', fontSize: '14px' }}>
+                     <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}><Clock size={16} /> 時間</div>
                    </th>
                    <td style={{ padding: '16px 8px', fontWeight: 'bold', fontSize: '16px' }}>
-                     {course.price} <span style={{ fontSize: '12px', fontWeight: 'normal', color: '#718096' }}>(税別)</span>
+                     10:00 - 17:00
+                   </td>
+                 </tr>
+                 <tr style={{ borderBottom: '1px solid #edf2f7' }}>
+                   <th style={{ textAlign: 'left', padding: '16px 8px', width: '100px', color: '#718096', fontSize: '14px' }}>
+                     <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}><MapPin size={16} /> 会場</div>
+                   </th>
+                   <td style={{ padding: '16px 8px', fontWeight: 'bold', fontSize: '16px' }}>
+                     <a href={course.mapUrl} target="_blank" rel="noopener noreferrer" style={{ color: themeColor, textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '4px' }}>
+                       {course.location}
+                       <ExternalLink size={14} />
+                     </a>
+                   </td>
+                 </tr>
+                 <tr style={{ borderBottom: '1px solid #edf2f7' }}>
+                   <th style={{ textAlign: 'left', padding: '16px 8px', width: '100px', color: '#718096', fontSize: '14px' }}>
+                     <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}><Banknote size={16} /> 価額</div>
+                   </th>
+                   <td style={{ padding: '16px 8px', fontWeight: 'bold', fontSize: '16px' }}>
+                     {course.price}
                    </td>
                  </tr>
                </tbody>
@@ -284,45 +203,27 @@ export const DetailView: React.FC<DetailViewProps> = ({ course, onBack }) => {
           </section>
         </div>
 
-        {/* 8. CTA Section */}
+        {/* CTA */}
         <div style={{ textAlign: 'center', marginTop: '40px', padding: '40px', backgroundColor: '#f8f9fa', borderRadius: '16px' }}>
           <button style={{ 
-            backgroundColor: themeColor, 
-            color: 'white', 
-            border: 'none', 
-            padding: '22px 80px', 
-            borderRadius: '50px', 
-            fontSize: '20px', 
-            fontWeight: 'bold', 
-            cursor: 'pointer',
-            boxShadow: `0 10px 20px -5px ${themeColor}60`, // Colored shadow
-            transition: 'transform 0.2s',
-            width: '100%',
-            maxWidth: '500px'
+            backgroundColor: themeColor, color: 'white', border: 'none', padding: '22px 80px', borderRadius: '50px', 
+            fontSize: '20px', fontWeight: 'bold', cursor: 'pointer', boxShadow: `0 10px 20px -5px ${themeColor}60`, 
+            transition: 'transform 0.2s', width: '100%', maxWidth: '500px' 
           }}
           onMouseEnter={(e) => e.currentTarget.style.transform = 'translateY(-2px)'}
           onMouseLeave={(e) => e.currentTarget.style.transform = 'translateY(0)'}
           >
             この講座に申し込む
           </button>
-          <p style={{ marginTop: '20px', fontSize: '14px', color: '#718096' }}>
-            ※定員に達し次第、締め切りとなります
-          </p>
+          <div style={{ marginTop: '20px', fontSize: '13px', color: '#718096', lineHeight: '1.6' }}>
+            <p>※定員に達し次第、締め切りとなります</p>
+            <p>※開催日2日前以降のキャンセルは、全額ご負担いただきます。</p>
+            <p>※最少催行人数5名に満たなかった場合、中止とさせていただき受講料全額を返金いたします。</p>
+          </div>
         </div>
 
       </div>
-
-      {/* Footer */}
-      <div style={{ 
-        textAlign: 'center', 
-        padding: '30px', 
-        color: '#a0aec0', 
-        fontSize: '12px', 
-        borderTop: '1px solid #edf2f7',
-        marginTop: 'auto'
-      }}>
-           Copyright © Aoba-BBT All Rights Reserved.
-      </div>
+      
     </div>
   );
 };

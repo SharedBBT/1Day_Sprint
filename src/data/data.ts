@@ -1,4 +1,4 @@
-// src/data.ts (注意：这里只能放数据，不能放 <div>)
+// src/data/data.ts
 
 export type CourseType = '判断' | '変革' | 'AI×問題解決';
 
@@ -10,11 +10,13 @@ export interface Course {
   title: string;
   subtitle: string;
   location: string;
+  mapUrl: string;
   price: string;
   instructor: {
     name: string;
     role: string;
     description: string;
+    image: string; // 新增：讲师头像链接
   };
   benefits: string[];
   recommendedFor: string[];
@@ -28,7 +30,8 @@ export const courses: Course[] = [
     dayOfWeek: '月',
     type: '判断',
     location: '六番町',
-    price: '78,000円',
+    mapUrl: 'https://aoba-bbt.com/aoba-bbt/#section04-02',
+    price: '55,000円（税込）',
     title: '財務判断 1Day Sprint',
     subtitle: '数字は「正解」を教えてくれない。\n判断の筋をつくる、財務の使い方。',
     description: '数字は「正解」を教えてくれない。不確実な状況でも判断ができる、財務の使い方を身につける1日。',
@@ -43,7 +46,8 @@ export const courses: Course[] = [
     instructor: {
       name: '大原 達朗',
       role: 'BBT大学経営学部長',
-      description: '一般財団法人日本M&Aアドバイザー協会代表理事／会長'
+      description: '一般財団法人日本M&Aアドバイザー協会代表理事／会長',
+      image: 'https://github.com/SharedBBT/psa-assets/blob/main/oohara2.jpg?raw=true'
     }
   },
   {
@@ -52,7 +56,8 @@ export const courses: Course[] = [
     dayOfWeek: '火',
     type: '変革',
     location: '麹町ラウンジ',
-    price: '78,000円',
+    mapUrl: 'https://aoba-bbt.com/aoba-bbt/#section04-01',
+    price: '55,000円（税込）',
     title: '自己変革 1Day Sprint',
     subtitle: '変革は、組織の前に\nまず自分から始まる。',
     description: '変革は、組織の前にまず自分から始まる。無意識の思考パターンに気づき、次の一歩を選び直す1日。',
@@ -67,7 +72,8 @@ export const courses: Course[] = [
     instructor: {
       name: '山本 伸一',
       role: 'Aoba-BBT リーダーシップ講師',
-      description: ''
+      description: '',
+      image: 'https://github.com/SharedBBT/psa-assets/blob/main/yamamoto.jpg?raw=true'
     }
   },
   {
@@ -76,7 +82,8 @@ export const courses: Course[] = [
     dayOfWeek: '月',
     type: '変革',
     location: '麹町ラウンジ',
-    price: '78,000円',
+    mapUrl: 'https://aoba-bbt.com/aoba-bbt/#section04-01',
+    price: '55,000円（税込）',
     title: '関係性変革 1Day Sprint',
     subtitle: '成果は個人ではなく、\n関係性から生まれる。',
     description: '成果は個人ではなく、関係性から生まれる。対話の質を変え、組織が動き出す関わり方を体感する1日。',
@@ -91,7 +98,8 @@ export const courses: Course[] = [
     instructor: {
       name: '山本 伸一',
       role: 'Aoba-BBT リーダーシップ講師',
-      description: ''
+      description: '',
+      image: 'https://github.com/SharedBBT/psa-assets/blob/main/yamamoto.jpg?raw=true'
     }
   },
   {
@@ -100,7 +108,8 @@ export const courses: Course[] = [
     dayOfWeek: '木',
     type: 'AI×問題解決',
     location: '麹町ラウンジ',
-    price: '78,000円',
+    mapUrl: 'https://aoba-bbt.com/aoba-bbt/#section04-01',
+    price: '55,000円（税込）',
     title: 'AI×思考の構造化 1Day Sprint',
     subtitle: '問題は「解き方」より、\n「定義」で決まる。',
     description: '問題は「解き方」より「定義」で決まる。AIを使い、複雑な状況を構造化する思考を鍛える1日。',
@@ -115,7 +124,8 @@ export const courses: Course[] = [
     instructor: {
       name: '宇野 令一郎',
       role: 'Aoba-BBT 常務執行役員',
-      description: 'BBT大学経営学部講師'
+      description: 'BBT大学経営学部講師',
+      image: 'https://github.com/SharedBBT/psa-assets/blob/main/uno.jpg?raw=true'
     }
   },
   {
@@ -124,7 +134,8 @@ export const courses: Course[] = [
     dayOfWeek: '木',
     type: 'AI×問題解決',
     location: '麹町ラウンジ',
-    price: '78,000円',
+    mapUrl: 'https://aoba-bbt.com/aoba-bbt/#section04-01',
+    price: '55,000円（税込）',
     title: 'AI×実務で解く力 1Day Sprint',
     subtitle: '考えたことが、\n実行されなければ意味がない。',
     description: '考えたことが、実行されなければ意味がない。AIを使い、構想を行動計画に落とし込む1日。',
@@ -139,7 +150,8 @@ export const courses: Course[] = [
     instructor: {
       name: '宇野 令一郎',
       role: 'Aoba-BBT 常務執行役員',
-      description: 'BBT大学経営学部講師'
+      description: 'BBT大学経営学部講師',
+      image: 'https://github.com/SharedBBT/psa-assets/blob/main/uno.jpg?raw=true'
     }
   },
   {
@@ -148,7 +160,8 @@ export const courses: Course[] = [
     dayOfWeek: '月',
     type: '変革',
     location: '麹町ラウンジ',
-    price: '78,000円',
+    mapUrl: 'https://aoba-bbt.com/aoba-bbt/#section04-01',
+    price: '55,000円（税込）',
     title: '組織変革 1Day Sprint',
     subtitle: '人は命令ではなく、\n「意味」で動く。',
     description: '人は命令ではなく、「意味」で動く。組織が動き続けるための、変革の原理を掴む1日。',
@@ -163,7 +176,8 @@ export const courses: Course[] = [
     instructor: {
       name: '山本 伸一',
       role: 'Aoba-BBT リーダーシップ講師',
-      description: ''
+      description: '',
+      image: 'https://github.com/SharedBBT/psa-assets/blob/main/yamamoto.jpg?raw=true'
     }
   }
 ];
