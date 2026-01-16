@@ -14,16 +14,18 @@ export const RealHomeView: React.FC<RealHomeViewProps> = ({ onScrollDown }) => {
       width: '100%',
       display: 'flex',
       flexDirection: 'column',
-      justifyContent: 'space-between', 
+      justifyContent: 'flex-start', 
       boxSizing: 'border-box',
       overflowX: 'hidden'
     }}>
 
-      {/* --- Top Section: 蓝色标签 --- */}
+      {/* --- Top Section --- */}
       <div className="top-badge-section" style={{ 
         display: 'flex', 
         justifyContent: 'flex-start', 
         alignItems: 'center', 
+        height: 'auto', 
+        paddingBottom: '20px'
       }}>
         <div style={{ 
           backgroundColor: '#2563eb', 
@@ -32,10 +34,10 @@ export const RealHomeView: React.FC<RealHomeViewProps> = ({ onScrollDown }) => {
           padding: '6px 20px', 
           borderRadius: '50px', 
           fontWeight: 'bold', 
-          fontSize: '14px',
+          fontSize: '15px',
           boxShadow: '0 4px 6px rgba(37, 99, 235, 0.2)'
         }}>
-          2026年2–3月 ｜ 春の芽吹きに向けた集中トレーニング
+          多忙なマネジャーが1日で変わる
         </div>
       </div>
 
@@ -72,18 +74,6 @@ export const RealHomeView: React.FC<RealHomeViewProps> = ({ onScrollDown }) => {
           <div 
             onClick={onScrollDown}
             className="action-box"
-            onMouseEnter={(e) => { 
-              if (window.innerWidth > 768) {
-                e.currentTarget.style.transform = 'translateY(-2px)'; 
-                e.currentTarget.style.boxShadow = '0 4px 10px rgba(0,159,232,0.2)'; 
-              }
-            }}
-            onMouseLeave={(e) => { 
-              if (window.innerWidth > 768) {
-                e.currentTarget.style.transform = 'translateY(0)'; 
-                e.currentTarget.style.boxShadow = 'none'; 
-              }
-            }}
           >
              「1日で、思考と行動のスイッチを入れ直す」<br/>ための集中型トレーニング
           </div>
@@ -96,12 +86,12 @@ export const RealHomeView: React.FC<RealHomeViewProps> = ({ onScrollDown }) => {
               TARGET
             </div>
 
-            <div style={{ textAlign: 'center', marginBottom: '20px' }}>
+            <div style={{ textAlign: 'center', marginBottom: '15px' }}>
               <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
                 <Users size={24} color="#2563eb" />
                 <h3 style={{ fontSize: '20px', fontWeight: 'bold', margin: 0 }}>想定受講者</h3>
               </div>
-              <div style={{ width: '80%', height: '1px', backgroundColor: '#e2e8f0', margin: '10px auto 0' }}></div>
+              <div style={{ width: '80%', height: '1px', backgroundColor: '#e2e8f0', margin: '8px auto 0' }}></div>
             </div>
 
             <p style={{ fontSize: '14px', fontWeight: 'bold', color: '#64748b', marginBottom: '5px' }}>
@@ -111,7 +101,7 @@ export const RealHomeView: React.FC<RealHomeViewProps> = ({ onScrollDown }) => {
               意思決定と組織づくりを担う<br/>マネジャー 〜 次世代リーダー層
             </p>
 
-            <ul style={{ listStyle: 'none', padding: 0, display: 'flex', flexDirection: 'column', gap: '15px' }}>
+            <ul style={{ listStyle: 'none', padding: 0, display: 'flex', flexDirection: 'column', gap: '12px' }}>
               {['現場の課題解決をリードする方', '変革の起点となる方', 'AI時代の新しいリーダーシップを模索中の方'].map((txt, i) => (
                 <li key={i} style={{ display: 'flex', alignItems: 'center', gap: '10px', fontSize: '14px', color: '#475569', fontWeight: '500' }}>
                   <Check color="#009fe8" size={18} strokeWidth={3} flex-shrink={0} /> {txt}
@@ -135,29 +125,26 @@ export const RealHomeView: React.FC<RealHomeViewProps> = ({ onScrollDown }) => {
       </div>
 
       <style>{`
-        /* --- Default / Desktop Styles --- */
+        /* --- Desktop Styles --- */
         .real-home-container {
-          height: 100vh;
-          padding: 2vh 4vw;
+          min-height: 100vh;
+          /* 【修正】PC版：顶部留 15px */
+          padding: 15px 4vw 2vh; 
           overflow: hidden;
-        }
-        .top-badge-section {
-          height: 10%;
-          padding-top: 10px;
         }
         .main-content {
           flex: 1;
           display: flex;
           gap: 30px;
           align-items: stretch;
-          height: 80%;
-          margin-top: 1vh;
+          height: auto;
+          margin-top: 0;
         }
         .left-column {
           flex: 1.2;
           display: flex;
           flex-direction: column;
-          justify-content: center;
+          justify-content: flex-start; 
         }
         .right-column {
           flex: 0.8;
@@ -167,7 +154,7 @@ export const RealHomeView: React.FC<RealHomeViewProps> = ({ onScrollDown }) => {
         .section-title {
           font-size: 24px;
           font-weight: bold;
-          margin-bottom: 15px;
+          margin-bottom: 12px;
           margin-top: 0px;
           border-bottom: 3px solid #009fe8;
           display: inline-block;
@@ -177,21 +164,21 @@ export const RealHomeView: React.FC<RealHomeViewProps> = ({ onScrollDown }) => {
         .description-text {
           font-size: 14px;
           line-height: 1.6;
-          margin-bottom: 20px;
+          margin-bottom: 15px;
           color: #4a5568;
         }
         .problem-list {
           display: flex;
           flex-direction: column;
-          gap: 10px;
-          margin-bottom: 20px;
+          gap: 8px;
+          margin-bottom: 15px;
         }
         .problem-item {
           display: flex;
           align-items: center;
           gap: 12px;
           background-color: #f8fafc;
-          padding: 10px 15px;
+          padding: 8px 15px;
           border-radius: 8px;
           border: 1px solid #e2e8f0;
         }
@@ -199,18 +186,23 @@ export const RealHomeView: React.FC<RealHomeViewProps> = ({ onScrollDown }) => {
           background-color: #e0f2fe;
           border: 2px solid #009fe8;
           border-radius: 10px;
-          padding: 15px;
+          padding: 12px;
           text-align: center;
           cursor: pointer;
-          transition: all 0.2s;
+          transition: all 0.3s ease;
           color: #0077b6;
           font-weight: bold;
           font-size: 16px;
         }
+        .action-box:hover {
+           transform: translateY(-2px);
+           box-shadow: 0 4px 10px rgba(0,159,232,0.2);
+        }
+
         .target-box {
           border: 2px solid #cbd5e1;
           border-radius: 12px;
-          padding: 25px;
+          padding: 20px;
           position: relative;
           height: 100%;
           background-color: white;
@@ -235,10 +227,11 @@ export const RealHomeView: React.FC<RealHomeViewProps> = ({ onScrollDown }) => {
           font-weight: bold;
           color: #009fe8;
           line-height: 1.4;
-          margin-bottom: 30px;
+          margin-bottom: 25px;
         }
         .scroll-indicator {
-          height: 8%;
+          height: auto;
+          padding-top: 20px;
           display: flex;
           justify-content: center;
           align-items: center;
@@ -247,23 +240,21 @@ export const RealHomeView: React.FC<RealHomeViewProps> = ({ onScrollDown }) => {
           animation: bounce 2s infinite;
         }
 
-        /* --- Mobile Styles (Override) --- */
+        /* --- Mobile Styles --- */
         @media (max-width: 768px) {
           .real-home-container {
-            height: auto; /* Allow scrolling */
+            height: auto; 
             min-height: 100vh;
-            padding: 20px 20px; /* Smaller padding */
+            /* 【維持】スマホ版は 0px のまま（前回の設定） */
+            padding: 0 20px 20px; 
             overflow: visible;
           }
           .top-badge-section {
-            height: auto;
-            margin-bottom: 30px;
-            padding-top: 80px; /* Space for fixed header */
+             margin-top: 10px; 
           }
           .main-content {
-            flex-direction: column; /* Stack vertically */
-            height: auto;
-            gap: 40px;
+            flex-direction: column;
+            gap: 30px;
             margin-bottom: 40px;
           }
           .left-column, .right-column {
@@ -277,12 +268,11 @@ export const RealHomeView: React.FC<RealHomeViewProps> = ({ onScrollDown }) => {
           }
           .target-box {
             height: auto;
-            padding: 30px 20px;
+            padding: 25px 20px;
           }
-          .scroll-indicator {
-            height: auto;
-            padding-bottom: 20px;
-            margin-top: 20px;
+          .action-box:hover {
+            transform: none;
+            box-shadow: none;
           }
         }
 

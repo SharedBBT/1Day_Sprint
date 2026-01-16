@@ -1,7 +1,7 @@
 // src/data/data.ts
 
-// 【修改点1】这里把 '判断' 改为 '財務'
-export type CourseType = '財務' | '変革' | 'AI×問題解決';
+// 移除了 '組織変革'，因为第6课归类为 '変革'（绿色）
+export type CourseType = '財務' | '変革' | 'AI×問題解決' | 'AI×事業戦略';
 
 export interface Course {
   id: number;
@@ -29,7 +29,7 @@ export const courses: Course[] = [
     id: 1,
     date: '2/9',
     dayOfWeek: '月',
-    type: '財務', // 【修改点2】这里改为 財務
+    type: '財務', // 蓝色
     location: '六番町',
     mapUrl: 'https://aoba-bbt.com/aoba-bbt/#section04-02',
     price: '55,000円（税込）',
@@ -55,7 +55,7 @@ export const courses: Course[] = [
     id: 2,
     date: '2/24',
     dayOfWeek: '火',
-    type: '変革',
+    type: '変革', // 绿色
     location: '麹町ラウンジ',
     mapUrl: 'https://aoba-bbt.com/aoba-bbt/#section04-01',
     price: '55,000円（税込）',
@@ -73,7 +73,7 @@ export const courses: Course[] = [
     instructor: {
       name: '山本 伸一',
       role: 'Aoba-BBT リーダーシップ講師',
-      description: '',
+      description: '㈱Aoba-BBTリーダーシップ講座責任者',
       image: 'https://github.com/SharedBBT/psa-assets/blob/main/yamamoto.jpg?raw=true'
     }
   },
@@ -81,7 +81,7 @@ export const courses: Course[] = [
     id: 3,
     date: '3/2',
     dayOfWeek: '月',
-    type: '変革',
+    type: '変革', // 绿色
     location: '麹町ラウンジ',
     mapUrl: 'https://aoba-bbt.com/aoba-bbt/#section04-01',
     price: '55,000円（税込）',
@@ -99,7 +99,7 @@ export const courses: Course[] = [
     instructor: {
       name: '山本 伸一',
       role: 'Aoba-BBT リーダーシップ講師',
-      description: '',
+      description: '㈱Aoba-BBTリーダーシップ講座責任者',
       image: 'https://github.com/SharedBBT/psa-assets/blob/main/yamamoto.jpg?raw=true'
     }
   },
@@ -107,7 +107,7 @@ export const courses: Course[] = [
     id: 4,
     date: '3/5',
     dayOfWeek: '木',
-    type: 'AI×問題解決',
+    type: 'AI×問題解決', // 紫色
     location: '麹町ラウンジ',
     mapUrl: 'https://aoba-bbt.com/aoba-bbt/#section04-01',
     price: '55,000円（税込）',
@@ -133,11 +133,11 @@ export const courses: Course[] = [
     id: 5,
     date: '3/19',
     dayOfWeek: '木',
-    type: 'AI×問題解決',
+    type: 'AI×事業戦略', // 紫色
     location: '麹町ラウンジ',
     mapUrl: 'https://aoba-bbt.com/aoba-bbt/#section04-01',
     price: '55,000円（税込）',
-    title: 'AI×事業戦略 1Day Sprint', // 【修改点3】这里改为 AI×事業戦略
+    title: 'AI×事業戦略 1Day Sprint',
     subtitle: '考えたことが、\n実行されなければ意味がない。',
     description: '考えたことが、実行されなければ意味がない。AIを使い、構想を行動計画に落とし込む1日。',
     benefits: [
@@ -159,7 +159,7 @@ export const courses: Course[] = [
     id: 6,
     date: '3/23',
     dayOfWeek: '月',
-    type: '変革',
+    type: '変革', // 【修改】这里改回 '変革'，所以会是绿色
     location: '麹町ラウンジ',
     mapUrl: 'https://aoba-bbt.com/aoba-bbt/#section04-01',
     price: '55,000円（税込）',
@@ -177,7 +177,7 @@ export const courses: Course[] = [
     instructor: {
       name: '山本 伸一',
       role: 'Aoba-BBT リーダーシップ講師',
-      description: '',
+      description: '㈱Aoba-BBTリーダーシップ講座責任者',
       image: 'https://github.com/SharedBBT/psa-assets/blob/main/yamamoto.jpg?raw=true'
     }
   }

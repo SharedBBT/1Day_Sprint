@@ -1,6 +1,5 @@
 import React from 'react';
-// 移除了 User，修复 build 报错
-import { Calendar, MapPin, ArrowLeft, CheckCircle, Lightbulb, Target, Clock, Banknote, ExternalLink } from 'lucide-react';
+import { Calendar, MapPin, ArrowLeft, CheckCircle, Lightbulb, Target, Clock, Banknote, ExternalLink, ChevronRight } from 'lucide-react';
 import { type Course, type CourseType } from './data/data';
 
 interface DetailViewProps {
@@ -8,11 +7,14 @@ interface DetailViewProps {
   onBack: () => void;
 }
 
+// 同步颜色逻辑
 const getCourseColor = (type: CourseType): string => {
   switch (type) {
-    case '財務': return '#009fe8'; // 【修改点】判断 -> 財務
+    case '財務': return '#009fe8';
     case '変革': return '#00c4cc';
-    case 'AI×問題解決': return '#9f7aea';
+    case 'AI×問題解決':
+    case 'AI×事業戦略':
+    case '組織変革': return '#9f7aea';
     default: return '#009fe8';
   }
 };
@@ -67,7 +69,7 @@ export const DetailView: React.FC<DetailViewProps> = ({ course, onBack }) => {
       {/* Main Content */}
       <div style={{ flex: 1, maxWidth: '1200px', margin: '0 auto', padding: '80px 24px 60px', width: '100%' }}>
         
-        {/* Hero / Title Section */}
+        {/* Title Section */}
         <div style={{ marginBottom: '50px', borderBottom: '1px solid #eee', paddingBottom: '30px' }}>
           <span style={{ color: themeColor, backgroundColor: 'white', border: `2px solid ${themeColor}`, padding: '6px 16px', borderRadius: '50px', fontWeight: 'bold', fontSize: '14px', display: 'inline-block', marginBottom: '20px' }}>
             {course.type}
@@ -130,7 +132,7 @@ export const DetailView: React.FC<DetailViewProps> = ({ course, onBack }) => {
              <h2 style={{ fontSize: '20px', fontWeight: 'bold', marginBottom: '20px', borderLeft: `4px solid ${themeColor}`, paddingLeft: '12px', color: '#4a5568' }}>登壇講師</h2>
              <div style={{ display: 'flex', gap: '20px', alignItems: 'center', backgroundColor: '#fff', border: '1px solid #e2e8f0', padding: '20px', borderRadius: '12px' }}>
                
-               {/* 头像区域 */}
+               {/* 头像 */}
                <div style={{ 
                  width: '80px', 
                  height: '80px', 
@@ -209,16 +211,17 @@ export const DetailView: React.FC<DetailViewProps> = ({ course, onBack }) => {
           <button style={{ 
             backgroundColor: themeColor, color: 'white', border: 'none', padding: '22px 80px', borderRadius: '50px', 
             fontSize: '20px', fontWeight: 'bold', cursor: 'pointer', boxShadow: `0 10px 20px -5px ${themeColor}60`, 
-            transition: 'transform 0.2s', width: '100%', maxWidth: '500px' 
+            transition: 'transform 0.2s', width: '100%', maxWidth: '500px',
+            display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: '8px'
           }}
           onMouseEnter={(e) => e.currentTarget.style.transform = 'translateY(-2px)'}
           onMouseLeave={(e) => e.currentTarget.style.transform = 'translateY(0)'}
           >
-            この講座に申し込む
+            この講座に申し込む <ChevronRight size={20} />
           </button>
           <div style={{ marginTop: '20px', fontSize: '13px', color: '#718096', lineHeight: '1.6' }}>
             <p>※定員に達し次第、締め切りとなります</p>
-            <p>※開催日2日前以降のキャンセルは、全額ご負担いただきます。</p>
+            <p>※開催日前日の正午以降のキャンセルは、全額ご負担いただきます。</p>
             <p>※最少催行人数5名に満たなかった場合、中止とさせていただき受講料全額を返金いたします。</p>
           </div>
         </div>

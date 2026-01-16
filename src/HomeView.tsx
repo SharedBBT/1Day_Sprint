@@ -1,5 +1,5 @@
 import React from 'react';
-import { Check, Target, Layers, Calendar, ListFilter } from 'lucide-react';
+import { Check, Target, Layers, ListFilter, Download, ChevronRight, MapPin } from 'lucide-react';
 import { courses, type CourseType } from './data/data';
 
 interface HomeViewProps {
@@ -8,21 +8,24 @@ interface HomeViewProps {
 
 const getCourseColor = (type: CourseType): string => {
   switch (type) {
-    case '財務': return '#009fe8'; // 【修改点】判断 -> 財務
-    case '変革': return '#00c4cc';
-    case 'AI×問題解決': return '#9f7aea';
+    case '財務': return '#009fe8'; // Blue
+    case '変革': return '#00c4cc'; // Green
+    case 'AI×問題解決':
+    case 'AI×事業戦略': return '#9f7aea'; // Purple
     default: return '#009fe8';
   }
 };
 
 export const HomeView: React.FC<HomeViewProps> = ({ onSelectCourse }) => {
   return (
-    <div className="home-view-container" style={{ 
+    <div id="program-list" className="home-view-container" style={{ 
       fontFamily: '"Noto Sans JP", "Helvetica Neue", Arial, sans-serif', 
       color: '#333',
       backgroundColor: '#ffffff',
       paddingBottom: '80px',
-      overflowX: 'hidden'
+      overflowX: 'hidden',
+      position: 'relative', // Add relative positioning for z-index layering if needed
+      zIndex: 10
     }}>
       
       {/* Main Container */}
@@ -34,7 +37,6 @@ export const HomeView: React.FC<HomeViewProps> = ({ onSelectCourse }) => {
 
         {/* 1. Banner Title */}
         <div className="banner-section">
-          {/* Left Title */}
           <div>
             <p style={{ color: '#666', marginBottom: '12px', fontSize: '15px', fontWeight: '500' }}>
               1Day Sprint シリーズ
@@ -46,14 +48,6 @@ export const HomeView: React.FC<HomeViewProps> = ({ onSelectCourse }) => {
               </h1>
             </div>
           </div>
-
-          {/* Right Logo */}
-          <img 
-            src="https://github.com/SharedBBT/psa-assets/blob/main/image%20(11).png?raw=true" 
-            alt="AOBA-BBT Logo"
-            className="logo-img"
-            style={{ height: '150px', objectFit: 'contain', marginBottom: '0px' }} 
-          />
         </div>
 
         {/* 2. Positioning Section */}
@@ -77,31 +71,24 @@ export const HomeView: React.FC<HomeViewProps> = ({ onSelectCourse }) => {
           </h2>
 
           <div className="positioning-grid">
-            
-            {/* Item 1 */}
             <div className="pos-item">
               <div className="pos-icon"><Check size={22} /></div>
               <p className="pos-text">
                 各テーマは単発参加可能な<br/>1日完結型プログラム
               </p>
             </div>
-
-            {/* Item 2 */}
             <div className="pos-item">
               <div className="pos-icon"><Target size={22} /></div>
               <p className="pos-text">
                 ご自身の「今、最も解決したい課題」<br/>に応じて選択
               </p>
             </div>
-
-            {/* Item 3 */}
             <div className="pos-item">
               <div className="pos-icon"><Layers size={22} /></div>
               <p className="pos-text">
                 複数受講により、判断・対話・実行が<br/>立体的につながる設計
               </p>
             </div>
-
           </div>
         </div>
 
@@ -111,13 +98,13 @@ export const HomeView: React.FC<HomeViewProps> = ({ onSelectCourse }) => {
              <ListFilter size={28} color="#009fe8" />
              プログラム一覧（全6本）
            </h2>
-           <div style={{
-             backgroundColor: '#3b82f6', color: 'white', fontSize: '13px', padding: '6px 16px',
-             borderRadius: '30px', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '6px',
-             boxShadow: '0 2px 5px rgba(59, 130, 246, 0.3)'
-           }}>
-             <Calendar size={14} /> 開催日順
-           </div>
+           
+           <button 
+             onClick={() => alert('PDFリンクは準備中です')}
+             className="pdf-dl-btn"
+           >
+             <Download size={16} /> 資料PDFダウンロード
+           </button>
         </div>
 
         {/* 4. Grid Layout - Course List */}
@@ -132,7 +119,7 @@ export const HomeView: React.FC<HomeViewProps> = ({ onSelectCourse }) => {
               <div 
                 key={course.id}
                 onClick={() => onSelectCourse(course.id)}
-                className="course-card"
+                className="course-card" 
                 style={{
                   backgroundColor: 'white',
                   border: '1px solid #e2e8f0',
@@ -143,19 +130,20 @@ export const HomeView: React.FC<HomeViewProps> = ({ onSelectCourse }) => {
                   display: 'flex',
                   alignItems: 'stretch',
                   boxShadow: '0 4px 6px rgba(0,0,0,0.01)',
-                  transition: 'all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1)',
                   minHeight: '160px'
                 }}
               >
                 <div style={{ width: '10px', backgroundColor: themeColor, flexShrink: 0 }}></div>
                 <div className="course-card-content" style={{ flex: 1, padding: '24px 30px', display: 'flex', alignItems: 'center' }}>
                   
+                  {/* Date */}
                   <div className="course-date-box" style={{ textAlign: 'center', marginRight: '30px', minWidth: '70px' }}>
                     <div style={{ fontSize: '12px', color: '#999', fontWeight: 'bold', marginBottom: '4px', letterSpacing: '1px' }}>DATE</div>
                     <div style={{ fontSize: '32px', fontWeight: '800', color: themeColor, lineHeight: '1' }}>{course.date}</div>
                     <div style={{ fontSize: '14px', color: '#666', marginTop: '6px', fontWeight: 'bold' }}>({course.dayOfWeek})</div>
                   </div>
 
+                  {/* Info */}
                   <div className="course-info-box" style={{ flex: 1, paddingRight: '20px', borderRight: '1px dashed #eee' }}>
                     <div style={{ marginBottom: '12px' }}>
                       <span style={{ color: themeColor, backgroundColor: 'white', fontSize: '12px', fontWeight: 'bold', padding: '4px 10px', borderRadius: '6px', border: `1px solid ${themeColor}` }}>
@@ -167,11 +155,41 @@ export const HomeView: React.FC<HomeViewProps> = ({ onSelectCourse }) => {
                     </h3>
                   </div>
 
-                  <div className="course-meta-box" style={{ textAlign: 'right', paddingLeft: '20px', display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: '12px', minWidth: '120px' }}>
-                    <div style={{ fontSize: '13px', color: '#718096', fontWeight: '500' }}>@{course.location}</div>
-                    <div style={{ fontSize: '16px', fontWeight: 'bold', color: '#4a5568' }}>
-                      {course.price} <span style={{ fontSize: '11px', fontWeight: 'normal', display: 'block', color: '#a0aec0' }}>(税別)</span>
+                  {/* Meta & Button */}
+                  <div className="course-meta-box" style={{ textAlign: 'right', paddingLeft: '20px', display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: '12px', minWidth: '160px' }}>
+                    
+                    {/* Location */}
+                    <div style={{ fontSize: '13px', color: '#718096', fontWeight: '500', display: 'flex', alignItems: 'center', justifyContent: 'flex-end', gap: '4px' }}
+                         onClick={(e) => {
+                           e.stopPropagation(); 
+                           window.open(course.mapUrl, '_blank');
+                         }}
+                    >
+                       <MapPin size={14} /> {course.location} <span className="map-link" style={{textDecoration:'underline', color:themeColor, cursor:'pointer'}}>[地図]</span>
                     </div>
+                    
+                    <div style={{ fontSize: '16px', fontWeight: 'bold', color: '#4a5568' }}>
+                      {course.price} <span style={{ fontSize: '11px', fontWeight: 'normal', display: 'block', color: '#a0aec0' }}>(税込)</span>
+                    </div>
+
+                    {/* CTA Button */}
+                    <button className="cta-button" style={{
+                      marginTop: '8px',
+                      backgroundColor: themeColor,
+                      color: 'white',
+                      border: 'none',
+                      borderRadius: '4px',
+                      padding: '8px 12px',
+                      fontSize: '13px',
+                      fontWeight: 'bold',
+                      cursor: 'pointer',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      gap: '4px'
+                    }}>
+                      詳細・お申し込み <ChevronRight size={14} />
+                    </button>
                   </div>
 
                 </div>
@@ -182,7 +200,48 @@ export const HomeView: React.FC<HomeViewProps> = ({ onSelectCourse }) => {
       </div>
 
       <style>{`
-        /* --- Desktop Default Styles (Helpers) --- */
+        /* --- Desktop Default Styles --- */
+        .home-content-wrapper {
+          /* 【关键修改】PC版整体上移 100px */
+          margin-top: -50px;
+        }
+
+        .course-card {
+          transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .course-card:hover {
+          transform: translateY(-5px);
+          box-shadow: 0 15px 30px rgba(0,0,0,0.1) !important;
+        }
+        
+        .cta-button {
+          transition: all 0.2s ease;
+        }
+        .cta-button:hover {
+          filter: brightness(1.1);
+          transform: translateY(-1px);
+        }
+
+        .pdf-dl-btn {
+           background-color: #fff;
+           color: #009fe8;
+           font-size: 14px;
+           padding: 8px 20px;
+           border-radius: 6px;
+           font-weight: bold;
+           display: flex;
+           align-items: center;
+           gap: 8px;
+           border: 2px solid #009fe8;
+           cursor: pointer;
+           transition: all 0.2s;
+        }
+        .pdf-dl-btn:hover {
+           background-color: #e0f2fe;
+           transform: translateY(-1px);
+        }
+
+        /* --- Layout Styles --- */
         .banner-section {
           margin-bottom: 50px;
           display: flex;
@@ -225,15 +284,13 @@ export const HomeView: React.FC<HomeViewProps> = ({ onSelectCourse }) => {
         @media (max-width: 768px) {
           .home-content-wrapper {
             padding: 20px 20px 0 !important; 
+            /* 【关键修改】手机版保持不动，覆盖掉 Desktop 的负 Margin */
+            margin-top: 0 !important;
           }
           .banner-section {
-            flex-direction: column-reverse; 
+            flex-direction: column; 
             align-items: flex-start;
-            gap: 20px;
-          }
-          .logo-img {
-            height: 80px !important;
-            align-self: flex-end;
+            gap: 10px;
           }
           .main-title {
             font-size: 24px;
@@ -279,12 +336,16 @@ export const HomeView: React.FC<HomeViewProps> = ({ onSelectCourse }) => {
             padding-left: 0 !important;
             text-align: left !important;
             width: 100%;
-            flex-direction: row !important;
-            justify-content: space-between !important;
-            align-items: center;
+            flex-direction: column !important; 
+            align-items: stretch !important; 
+            gap: 10px;
           }
           .course-title {
             font-size: 18px !important;
+          }
+          .course-card:hover {
+            transform: none;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.01) !important;
           }
         }
       `}</style>
