@@ -7,14 +7,13 @@ interface DetailViewProps {
   onBack: () => void;
 }
 
-// 同步颜色逻辑
 const getCourseColor = (type: CourseType): string => {
   switch (type) {
-    case '財務': return '#009fe8';
-    case '変革': return '#00c4cc';
+    case '財務': return '#009fe8'; // Blue
+    case '変革': return '#00c4cc'; // Green
     case 'AI×問題解決':
-    case 'AI×事業戦略':
-    case '組織変革': return '#9f7aea';
+    case 'AI×事業戦略': return '#9f7aea'; // Purple
+    // 【关键修复】删除了 '組織変革' 的 case，因为 data.ts 里已经没有这个类型了
     default: return '#009fe8';
   }
 };
