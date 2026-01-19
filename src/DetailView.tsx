@@ -13,7 +13,6 @@ const getCourseColor = (type: CourseType): string => {
     case '変革': return '#00c4cc'; // Green
     case 'AI×問題解決':
     case 'AI×事業戦略': return '#9f7aea'; // Purple
-    // 【关键修复】删除了 '組織変革' 的 case，因为 data.ts 里已经没有这个类型了
     default: return '#009fe8';
   }
 };
@@ -207,14 +206,17 @@ export const DetailView: React.FC<DetailViewProps> = ({ course, onBack }) => {
 
         {/* CTA */}
         <div style={{ textAlign: 'center', marginTop: '40px', padding: '40px', backgroundColor: '#f8f9fa', borderRadius: '16px' }}>
-          <button style={{ 
-            backgroundColor: themeColor, color: 'white', border: 'none', padding: '22px 80px', borderRadius: '50px', 
-            fontSize: '20px', fontWeight: 'bold', cursor: 'pointer', boxShadow: `0 10px 20px -5px ${themeColor}60`, 
-            transition: 'transform 0.2s', width: '100%', maxWidth: '500px',
-            display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: '8px'
-          }}
-          onMouseEnter={(e) => e.currentTarget.style.transform = 'translateY(-2px)'}
-          onMouseLeave={(e) => e.currentTarget.style.transform = 'translateY(0)'}
+          <button 
+            // 【変更点】クリック時にカートURLを開く
+            onClick={() => window.open(course.entryUrl, '_blank')}
+            style={{ 
+              backgroundColor: themeColor, color: 'white', border: 'none', padding: '22px 80px', borderRadius: '50px', 
+              fontSize: '20px', fontWeight: 'bold', cursor: 'pointer', boxShadow: `0 10px 20px -5px ${themeColor}60`, 
+              transition: 'transform 0.2s', width: '100%', maxWidth: '500px',
+              display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: '8px'
+            }}
+            onMouseEnter={(e) => e.currentTarget.style.transform = 'translateY(-2px)'}
+            onMouseLeave={(e) => e.currentTarget.style.transform = 'translateY(0)'}
           >
             この講座に申し込む <ChevronRight size={20} />
           </button>

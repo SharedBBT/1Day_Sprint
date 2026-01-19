@@ -1,6 +1,5 @@
 // src/data/data.ts
 
-// 移除了 '組織変革'，因为第6课归类为 '変革'（绿色）
 export type CourseType = '財務' | '変革' | 'AI×問題解決' | 'AI×事業戦略';
 
 export interface Course {
@@ -13,6 +12,8 @@ export interface Course {
   location: string;
   mapUrl: string;
   price: string;
+  // 【追加】申し込みURL
+  entryUrl: string; 
   instructor: {
     name: string;
     role: string;
@@ -29,10 +30,12 @@ export const courses: Course[] = [
     id: 1,
     date: '2/9',
     dayOfWeek: '月',
-    type: '財務', // 蓝色
+    type: '財務',
     location: '六番町',
     mapUrl: 'https://aoba-bbt.com/aoba-bbt/#section04-02',
     price: '55,000円（税込）',
+    // 【追加】URL
+    entryUrl: 'https://www.bbt757.com/svlShop/cart.do?code=d619e6da0ec7067b3d829cee1e2c9cb8c208a633b896484f31b8d9671efb9e35',
     title: '財務判断 1Day Sprint',
     subtitle: '数字は「正解」を教えてくれない。\n判断の筋をつくる、財務の使い方。',
     description: '数字は「正解」を教えてくれない。不確実な状況でも判断ができる、財務の使い方を身につける1日。',
@@ -55,10 +58,12 @@ export const courses: Course[] = [
     id: 2,
     date: '2/24',
     dayOfWeek: '火',
-    type: '変革', // 绿色
+    type: '変革',
     location: '麹町ラウンジ',
     mapUrl: 'https://aoba-bbt.com/aoba-bbt/#section04-01',
     price: '55,000円（税込）',
+    // 【追加】URL
+    entryUrl: 'https://www.bbt757.com/svlShop/cart.do?code=d619e6da0ec7067b3d829cee1e2c9cb8c208a633b896484f49a08650a7e186c8',
     title: '自己変革 1Day Sprint',
     subtitle: '変革は、組織の前に\nまず自分から始まる。',
     description: '変革は、組織の前にまず自分から始まる。無意識の思考パターンに気づき、次の一歩を選び直す1日。',
@@ -81,10 +86,12 @@ export const courses: Course[] = [
     id: 3,
     date: '3/2',
     dayOfWeek: '月',
-    type: '変革', // 绿色
+    type: '変革',
     location: '麹町ラウンジ',
     mapUrl: 'https://aoba-bbt.com/aoba-bbt/#section04-01',
     price: '55,000円（税込）',
+    // 【追加】URL
+    entryUrl: 'https://www.bbt757.com/svlShop/cart.do?code=d619e6da0ec7067b3d829cee1e2c9cb8c208a633b896484fbf1d8e883f2be9ac',
     title: '関係性変革 1Day Sprint',
     subtitle: '成果は個人ではなく、\n関係性から生まれる。',
     description: '成果は個人ではなく、関係性から生まれる。対話の質を変え、組織が動き出す関わり方を体感する1日。',
@@ -107,10 +114,12 @@ export const courses: Course[] = [
     id: 4,
     date: '3/5',
     dayOfWeek: '木',
-    type: 'AI×問題解決', // 紫色
+    type: 'AI×問題解決',
     location: '麹町ラウンジ',
     mapUrl: 'https://aoba-bbt.com/aoba-bbt/#section04-01',
     price: '55,000円（税込）',
+    // 【追加】URL
+    entryUrl: 'https://www.bbt757.com/svlShop/cart.do?code=d619e6da0ec7067b3d829cee1e2c9cb8c208a633b896484f5d66392606b25278',
     title: 'AI×思考の構造化 1Day Sprint',
     subtitle: '問題は「解き方」より、\n「定義」で決まる。',
     description: '問題は「解き方」より「定義」で決まる。AIを使い、複雑な状況を構造化する思考を鍛える1日。',
@@ -133,10 +142,12 @@ export const courses: Course[] = [
     id: 5,
     date: '3/19',
     dayOfWeek: '木',
-    type: 'AI×事業戦略', // 紫色
+    type: 'AI×事業戦略',
     location: '麹町ラウンジ',
     mapUrl: 'https://aoba-bbt.com/aoba-bbt/#section04-01',
     price: '55,000円（税込）',
+    // 【追加】URL
+    entryUrl: 'https://www.bbt757.com/svlShop/cart.do?code=d619e6da0ec7067b3d829cee1e2c9cb8c208a633b896484f5ec04bd789c0bf0b',
     title: 'AI×事業戦略 1Day Sprint',
     subtitle: '考えたことが、\n実行されなければ意味がない。',
     description: '考えたことが、実行されなければ意味がない。AIを使い、構想を行動計画に落とし込む1日。',
@@ -159,10 +170,12 @@ export const courses: Course[] = [
     id: 6,
     date: '3/23',
     dayOfWeek: '月',
-    type: '変革', // 【修改】这里改回 '変革'，所以会是绿色
+    type: '変革',
     location: '麹町ラウンジ',
     mapUrl: 'https://aoba-bbt.com/aoba-bbt/#section04-01',
     price: '55,000円（税込）',
+    // 【追加】URL
+    entryUrl: 'https://www.bbt757.com/svlShop/cart.do?code=d619e6da0ec7067b3d829cee1e2c9cb8c208a633b896484f39b1ce79a74aa8b6',
     title: '組織変革 1Day Sprint',
     subtitle: '人は命令ではなく、\n「意味」で動く。',
     description: '人は命令ではなく、「意味」で動く。組織が動き続けるための、変革の原理を掴む1日。',
