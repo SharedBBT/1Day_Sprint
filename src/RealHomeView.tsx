@@ -19,7 +19,7 @@ export const RealHomeView: React.FC<RealHomeViewProps> = ({ onScrollDown }) => {
       overflowX: 'hidden'
     }}>
 
-      {/* --- Top Section --- */}
+      {/* --- Top Section: Badge --- */}
       <div className="top-badge-section" style={{ 
         display: 'flex', 
         justifyContent: 'flex-start', 
@@ -41,74 +41,96 @@ export const RealHomeView: React.FC<RealHomeViewProps> = ({ onScrollDown }) => {
         </div>
       </div>
 
-      {/* --- Main Content --- */}
+      {/* --- Main Content Wrapper --- */}
       <main className="main-content">
-        
-        {/* Left: Why Now? */}
-        <div className="left-column">
+
+        {/* 1. NEW: Hero Message Area (ご依頼の文章を追加) */}
+        <section className="hero-message-area">
+          <h1 className="main-headline">
+            春の新たな挑戦に向けた、<br className="mobile-br" />組織の「芽吹き」のためのトレーニング
+          </h1>
+          <div className="hero-text-body">
+            <p>
+              2026年2月から3月にかけて、<span className="highlight">財務・変革・AI</span>の3つの視点からリーダーの実践力を1日で集中的に高める「1Day Sprint シリーズ」を開催いたします。
+            </p>
+            <p>
+              先行きの見通しが立ちにくい「不確実な時代」において、リーダーにはこれまで以上に、<br className="desktop-br"/>
+              <span className="highlight-bold">数字に基づいた的確な判断力</span>、
+              <span className="highlight-bold">自らの思考をアップデートする変革の姿勢</span>、<br className="desktop-br"/>
+              そして<span className="highlight-bold">最新テクノロジー（AI）を使いこなす知性</span>が求められています。
+            </p>
+          </div>
+        </section>
+
+        {/* 2. OLD: Original Content Columns (元の内容を維持) */}
+        <div className="content-grid">
           
-          <h2 className="section-title">
-            なぜ、いま1Day Sprintなのか
-          </h2>
+          {/* Left: Why Now? + Problem List */}
+          <div className="left-column">
+            <h2 className="section-title">
+              なぜ、いま1Day Sprintなのか
+            </h2>
 
-          <p className="description-text">
-            環境変化が激しい時代、リーダーに求められるのは「正解を出す力」ではなく、考え、判断し、動き続ける力です。しかし現実には多くの課題があります。
-          </p>
+            <p className="description-text">
+              環境変化が激しい時代、リーダーに求められるのは「正解を出す力」ではなく、考え、判断し、動き続ける力です。しかし現実には多くの課題があります。
+            </p>
 
-          <div className="problem-list">
-            {[
-              { icon: Hourglass, text: '忙しさの中で立ち止まって考える時間が取れない' },
-              { icon: Link2Off, text: '学びが点在し、行動につながらない' },
-              { icon: RefreshCw, text: '組織や環境の変化に思考が追いつかない' }
-            ].map((item, i) => (
-              <div key={i} className="problem-item">
-                <div style={{ backgroundColor: '#94a3b8', padding: '6px', borderRadius: '50%', color: 'white', display: 'flex', flexShrink: 0 }}>
-                  <item.icon size={16} />
+            <div className="problem-list">
+              {[
+                { icon: Hourglass, text: '忙しさの中で立ち止まって考える時間が取れない' },
+                { icon: Link2Off, text: '学びが点在し、行動につながらない' },
+                { icon: RefreshCw, text: '組織や環境の変化に思考が追いつかない' }
+              ].map((item, i) => (
+                <div key={i} className="problem-item">
+                  <div style={{ backgroundColor: '#94a3b8', padding: '6px', borderRadius: '50%', color: 'white', display: 'flex', flexShrink: 0 }}>
+                    <item.icon size={16} />
+                  </div>
+                  <span style={{ fontSize: '14px', fontWeight: 'bold', color: '#334155' }}>{item.text}</span>
                 </div>
-                <span style={{ fontSize: '14px', fontWeight: 'bold', color: '#334155' }}>{item.text}</span>
-              </div>
-            ))}
-          </div>
-
-          {/* Action Box */}
-          <div 
-            onClick={onScrollDown}
-            className="action-box"
-          >
-             「1日で、思考と行動のスイッチを入れ直す」<br/>ための集中型トレーニング
-          </div>
-        </div>
-
-        {/* Right: Target */}
-        <div className="right-column">
-          <div className="target-box">
-            <div className="target-badge">
-              TARGET
-            </div>
-
-            <div style={{ textAlign: 'center', marginBottom: '15px' }}>
-              <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
-                <Users size={24} color="#2563eb" />
-                <h3 style={{ fontSize: '20px', fontWeight: 'bold', margin: 0 }}>想定受講者</h3>
-              </div>
-              <div style={{ width: '80%', height: '1px', backgroundColor: '#e2e8f0', margin: '8px auto 0' }}></div>
-            </div>
-
-            <p style={{ fontSize: '14px', fontWeight: 'bold', color: '#64748b', marginBottom: '5px' }}>
-              変化の大きい環境で、
-            </p>
-            <p className="target-main-text">
-              意思決定と組織づくりを担う<br/>マネジャー 〜 次世代リーダー層
-            </p>
-
-            <ul style={{ listStyle: 'none', padding: 0, display: 'flex', flexDirection: 'column', gap: '12px' }}>
-              {['現場の課題解決をリードする方', '変革の起点となる方', 'AI時代の新しいリーダーシップを模索中の方'].map((txt, i) => (
-                <li key={i} style={{ display: 'flex', alignItems: 'center', gap: '10px', fontSize: '14px', color: '#475569', fontWeight: '500' }}>
-                  <Check color="#009fe8" size={18} strokeWidth={3} flex-shrink={0} /> {txt}
-                </li>
               ))}
-            </ul>
+            </div>
+
+            {/* Action Box */}
+            <div 
+              onClick={onScrollDown}
+              className="action-box"
+            >
+               「1日で、思考と行動のスイッチを入れ直す」<br/>ための集中型トレーニング
+            </div>
           </div>
+
+          {/* Right: Target */}
+          <div className="right-column">
+            <div className="target-box">
+              <div className="target-badge">
+                TARGET
+              </div>
+
+              <div style={{ textAlign: 'center', marginBottom: '15px' }}>
+                <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
+                  <Users size={24} color="#2563eb" />
+                  <h3 style={{ fontSize: '20px', fontWeight: 'bold', margin: 0 }}>想定受講者</h3>
+                </div>
+                <div style={{ width: '80%', height: '1px', backgroundColor: '#e2e8f0', margin: '8px auto 0' }}></div>
+              </div>
+
+              <p style={{ fontSize: '14px', fontWeight: 'bold', color: '#64748b', marginBottom: '5px' }}>
+                変化の大きい環境で、
+              </p>
+              <p className="target-main-text">
+                意思決定と組織づくりを担う<br/>マネジャー 〜 次世代リーダー層
+              </p>
+
+              <ul style={{ listStyle: 'none', padding: 0, display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                {['現場の課題解決をリードする方', '変革の起点となる方', 'AI時代の新しいリーダーシップを模索中の方'].map((txt, i) => (
+                  <li key={i} style={{ display: 'flex', alignItems: 'center', gap: '10px', fontSize: '14px', color: '#475569', fontWeight: '500' }}>
+                    <Check color="#009fe8" size={18} strokeWidth={3} flex-shrink={0} /> {txt}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+
         </div>
       </main>
 
@@ -119,7 +141,6 @@ export const RealHomeView: React.FC<RealHomeViewProps> = ({ onScrollDown }) => {
            style={{ background: 'none', border: 'none', cursor: 'pointer', display: 'flex', flexDirection: 'column', alignItems: 'center', color: '#94a3b8' }}
            className="bounce-animation"
          >
-           <span style={{ fontSize: '11px', fontWeight: 'bold', marginBottom: '2px' }}>ラインナップを見る</span>
            <ChevronDown size={24} />
          </button>
       </div>
@@ -128,38 +149,81 @@ export const RealHomeView: React.FC<RealHomeViewProps> = ({ onScrollDown }) => {
         /* --- Desktop Styles --- */
         .real-home-container {
           min-height: 100vh;
-          /* 【修正】PC版：顶部留 15px */
           padding: 15px 4vw 2vh; 
           overflow: hidden;
         }
         .main-content {
           flex: 1;
           display: flex;
+          flex-direction: column; /* Stack New Text and Columns */
           gap: 30px;
-          align-items: stretch;
           height: auto;
           margin-top: 0;
         }
+
+        /* Hero Message Area (New) */
+        .hero-message-area {
+          width: 100%;
+          margin-bottom: 10px;
+        }
+        .main-headline {
+          font-size: 28px;
+          font-weight: 900;
+          color: #1a202c;
+          margin: 0 0 20px 0;
+          line-height: 1.4;
+        }
+        .hero-text-body {
+          font-size: 16px;
+          line-height: 1.9;
+          color: #4a5568;
+          font-weight: 500;
+        }
+        .hero-text-body p {
+          margin-bottom: 16px;
+        }
+        .highlight {
+          color: #009fe8;
+          font-weight: bold;
+        }
+        .highlight-bold {
+          color: #2d3748;
+          font-weight: 900;
+          background: linear-gradient(transparent 70%, #e0f2fe 70%);
+        }
+        .mobile-br { display: none; }
+        .desktop-br { display: inline; }
+
+        /* Grid for Old Content */
+        .content-grid {
+          display: flex;
+          gap: 40px;
+          align-items: stretch;
+        }
+
         .left-column {
-          flex: 1.2;
+          flex: 1.3;
           display: flex;
           flex-direction: column;
           justify-content: flex-start; 
         }
         .right-column {
-          flex: 0.8;
+          flex: 0.7;
           display: flex;
           flex-direction: column;
         }
+
+        /* Original Content Styles */
         .section-title {
-          font-size: 24px;
+          font-size: 22px;
           font-weight: bold;
-          margin-bottom: 12px;
+          margin-bottom: 15px;
           margin-top: 0px;
           border-bottom: 3px solid #009fe8;
           display: inline-block;
           padding-bottom: 4px;
           align-self: flex-start;
+          color: #2d3748;
         }
         .description-text {
           font-size: 14px;
@@ -186,7 +250,7 @@ export const RealHomeView: React.FC<RealHomeViewProps> = ({ onScrollDown }) => {
           background-color: #e0f2fe;
           border: 2px solid #009fe8;
           border-radius: 10px;
-          padding: 12px;
+          padding: 16px;
           text-align: center;
           cursor: pointer;
           transition: all 0.3s ease;
@@ -202,13 +266,14 @@ export const RealHomeView: React.FC<RealHomeViewProps> = ({ onScrollDown }) => {
         .target-box {
           border: 2px solid #cbd5e1;
           border-radius: 12px;
-          padding: 20px;
+          padding: 24px;
           position: relative;
           height: 100%;
           background-color: white;
           display: flex;
           flex-direction: column;
           justify-content: center;
+          box-shadow: 0 4px 6px rgba(0,0,0,0.02);
         }
         .target-badge {
           position: absolute;
@@ -245,7 +310,6 @@ export const RealHomeView: React.FC<RealHomeViewProps> = ({ onScrollDown }) => {
           .real-home-container {
             height: auto; 
             min-height: 100vh;
-            /* 【維持】スマホ版は 0px のまま（前回の設定） */
             padding: 0 20px 20px; 
             overflow: visible;
           }
@@ -253,18 +317,25 @@ export const RealHomeView: React.FC<RealHomeViewProps> = ({ onScrollDown }) => {
              margin-top: 10px; 
           }
           .main-content {
-            flex-direction: column;
-            gap: 30px;
+            gap: 40px;
             margin-bottom: 40px;
           }
+          .main-headline {
+            font-size: 22px;
+          }
+          .mobile-br { display: block; }
+          .desktop-br { display: none; }
+          
+          .content-grid {
+            flex-direction: column;
+            gap: 40px;
+          }
+          
           .left-column, .right-column {
             flex: auto;
           }
           .section-title {
             font-size: 20px;
-          }
-          .problem-item {
-            padding: 12px;
           }
           .target-box {
             height: auto;
