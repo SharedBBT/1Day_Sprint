@@ -1,5 +1,6 @@
 import React from 'react';
-import { Download, Edit } from 'lucide-react';
+// 【変更】アイコンを Download/Edit から Mail/List に変更
+import { Mail, List } from 'lucide-react';
 
 const HEADER_HEIGHT = '70px';
 
@@ -34,11 +35,16 @@ export const Header: React.FC = () => {
 
         {/* 右侧：Buttons */}
         <div className="header-right">
-          <button className="header-btn secondary-btn" onClick={() => alert('PDFリンクは準備中です')}>
-            <Download size={16} />
-            <span className="btn-text">資料ダウンロード</span>
+          {/* 1. お問合せ Button */}
+          <button 
+            className="header-btn secondary-btn" 
+            onClick={() => window.open('https://www.bbt757.com/svlEnquete/jsp/user/top?id=f131eeaece2730e1d751341179494ca5', '_blank')}
+          >
+            <Mail size={16} />
+            <span className="btn-text">お問合せ</span>
           </button>
           
+          {/* 2. プログラム一覧 Button (Scroll) */}
           <button 
             className="header-btn primary-btn"
             onClick={() => {
@@ -47,8 +53,8 @@ export const Header: React.FC = () => {
               else window.scrollTo({ top: 500, behavior: 'smooth' });
             }}
           >
-            <Edit size={16} />
-            <span className="btn-text">受講申込</span>
+            <List size={16} />
+            <span className="btn-text">プログラム一覧</span>
           </button>
         </div>
 
@@ -155,31 +161,23 @@ export const Header: React.FC = () => {
               height: 60px;
             }
             .header-left {
-              gap: 0; /* Remove gap since logo is gone */
+              gap: 0; 
             }
-            
-            /* 【关键修改】隐藏 Logo */
             .header-logo {
               display: none; 
             }
-
-            /* 【关键修改】显示标题组 */
             .header-text-group {
-              display: flex; /* Ensure visible */
+              display: flex; 
             }
-
             .header-subtitle {
               font-size: 9px;
             }
-
             .header-title {
               font-size: 14px;
-              /* Remove truncation to show full title */
               max-width: none; 
               overflow: visible;
-              white-space: normal; /* Allow wrap if screen is extremely small, or keep nowrap */
+              white-space: normal; 
             }
-
             .header-right {
               gap: 8px;
             }
@@ -196,7 +194,6 @@ export const Header: React.FC = () => {
           }
           
           @media (max-width: 380px) {
-             /* Extreme small screen adjustments if needed */
              .header-title { font-size: 12px; }
           }
         `}</style>

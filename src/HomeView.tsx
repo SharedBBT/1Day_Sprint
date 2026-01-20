@@ -1,5 +1,6 @@
 import React from 'react';
-import { Check, Target, Layers, ListFilter, Download, ChevronRight, MapPin } from 'lucide-react';
+// 【変更】Download -> Mail
+import { Check, Target, Layers, ListFilter, Mail, ChevronRight, MapPin } from 'lucide-react';
 import { courses, type CourseType } from './data/data';
 
 interface HomeViewProps {
@@ -24,7 +25,7 @@ export const HomeView: React.FC<HomeViewProps> = ({ onSelectCourse }) => {
       backgroundColor: '#ffffff',
       paddingBottom: '80px',
       overflowX: 'hidden',
-      position: 'relative', // Add relative positioning for z-index layering if needed
+      position: 'relative',
       zIndex: 10
     }}>
       
@@ -99,11 +100,12 @@ export const HomeView: React.FC<HomeViewProps> = ({ onSelectCourse }) => {
              プログラム一覧（全6本）
            </h2>
            
+           {/* 【変更】資料ダウンロード -> お問合せ */}
            <button 
-             onClick={() => alert('PDFリンクは準備中です')}
+             onClick={() => window.open('https://www.bbt757.com/svlEnquete/jsp/user/top?id=f131eeaece2730e1d751341179494ca5', '_blank')}
              className="pdf-dl-btn"
            >
-             <Download size={16} /> 資料PDFダウンロード
+             <Mail size={16} /> お問合せ
            </button>
         </div>
 
@@ -202,7 +204,6 @@ export const HomeView: React.FC<HomeViewProps> = ({ onSelectCourse }) => {
       <style>{`
         /* --- Desktop Default Styles --- */
         .home-content-wrapper {
-          /* 【关键修改】PC版整体上移 100px */
           margin-top: -50px;
         }
 
@@ -222,6 +223,7 @@ export const HomeView: React.FC<HomeViewProps> = ({ onSelectCourse }) => {
           transform: translateY(-1px);
         }
 
+        /* Inquiry Button Style */
         .pdf-dl-btn {
            background-color: #fff;
            color: #009fe8;
@@ -284,7 +286,6 @@ export const HomeView: React.FC<HomeViewProps> = ({ onSelectCourse }) => {
         @media (max-width: 768px) {
           .home-content-wrapper {
             padding: 20px 20px 0 !important; 
-            /* 【关键修改】手机版保持不动，覆盖掉 Desktop 的负 Margin */
             margin-top: 0 !important;
           }
           .banner-section {
